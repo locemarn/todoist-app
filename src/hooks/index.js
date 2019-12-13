@@ -59,8 +59,9 @@ export const useProjects = () => {
     firebase
       .firestore()
       .collection('projects')
-      .where('userId', '==', '1')
-      .orderBy('projectId').get()
+      .where('projectId', '==', '1')
+      // .orderBy('projectId')
+      .get()
       .then(snapshot => {
         const allProjects = snapshot.docs.map(project => ({
           ...project.data(),
@@ -73,6 +74,9 @@ export const useProjects = () => {
       })
       
   }, [projects])
+
+  console.log('projects', projects);
+  
 
   return { projects, setProjects }
 }
