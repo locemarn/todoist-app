@@ -14,17 +14,17 @@ export const AddProject = ({ shoudShow = false }) => {
     projectName &&
     firebase
       .firestore()
-      .collection('projects')
+      .collection("projects")
       .add({
         projectId,
         name: projectName,
-        userId: '1'
+        userId: "1"
       })
       .then(() => {
-        setProjects([])
-        setProjectName('')
-        setShow(false)
-      })
+        setProjects([]);
+        setProjectName("");
+        setShow(false);
+      });
 
   return (
     <div className="add-project" data-testid="add-project">
@@ -47,22 +47,22 @@ export const AddProject = ({ shoudShow = false }) => {
             Add Project
           </button>
           <span
-            data-test-id='hide-project-overlay'
-            className='add-project__cancel'
+            data-test-id="hide-project-overlay"
+            className="add-project__cancel"
             onClick={() => setShow(false)}
           >
             Cancel
           </span>
         </div>
       )}
-        <span className="add-project__plus">+</span>
-        <span
-          data-testid="add-project-action"
-          className="add-project__text"
-          onClick={() => setShow(!show)}
-        >
-          Add Project
-        </span>
+      <span className="add-project__plus">+</span>
+      <span
+        data-testid="add-project-action"
+        className="add-project__text"
+        onClick={() => setShow(!show)}
+      >
+        Add Project
+      </span>
     </div>
-  )
+  );
 };
