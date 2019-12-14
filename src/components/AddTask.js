@@ -3,32 +3,33 @@ import { FaRegListAlt, FaRegCalendarAlt } from "react-icons/fa";
 import moment from "moment";
 import { firebase } from "../firebase";
 import { useSelectedProjectValue } from "../context";
+import { ProjectOverlay } from "./ProjectOverlay";
 
 export const AddTask = ({
   showAddTaskMain = true,
   shouldShowMain = false,
   showQuickAddTask,
-  setShowQuickAddTask,
+  setShowQuickAddTask
 }) => {
-  const [task, setTask] = useState('')
-  const [taskDate, setTaskDate] = useState('')
-  const [project, setProject] = useState('')
-  const [showMain, setShowMain] = useState(shouldShowMain)
-  const [showProjectOverlay, setShowProjectOverlay] = useState(false)
-  const [showTaskDate, setShowTaskDate] = useState(false)
+  const [task, setTask] = useState("");
+  const [taskDate, setTaskDate] = useState("");
+  const [project, setProject] = useState("");
+  const [showMain, setShowMain] = useState(shouldShowMain);
+  const [showProjectOverlay, setShowProjectOverlay] = useState(false);
+  const [showTaskDate, setShowTaskDate] = useState(false);
 
-  const {selectedProject} = useSelectedProjectValue()
+  const { selectedProject } = useSelectedProjectValue();
 
   const addTask = () => {
-    const projectId = project || selectedProject
-    let collatedDate = ''
+    const projectId = project || selectedProject;
+    let collatedDate = "";
 
-    if (projectId === 'TODAY') {
-      collatedDate = moment().format('DD/MM/YYYY')
-    } else if (projectId === 'next_7') {
+    if (projectId === "TODAY") {
+      collatedDate = moment().format("DD/MM/YYYY");
+    } else if (projectId === "next_7") {
       collatedDate = moment()
-        .add(7, 'days')
-        .format('DD/MM/YYYY')
+        .add(7, "days")
+        .format("DD/MM/YYYY");
     }
 
     return (
@@ -36,26 +37,26 @@ export const AddTask = ({
       projectId &&
       firebase
         .firestore()
-        .collection('tasks')
+        .collection("tasks")
         .add({
           archived: false,
           projectId,
           task,
           date: collatedDate || taskDate,
-          userId: '1'
+          userId: "1"
         })
         .then(() => {
-          setTask('')
-          setProject('')
-          setShowMain('')
-          setShowProjectOverlay(false)
+          setTask("");
+          setProject("");
+          setShowMain("");
+          setShowProjectOverlay(false);
         })
-    )
-  }
+    );
+  };
 
   return (
     <div
-      className={showQuickAddTask ? 'add-task add-task__overlay' : 'add-task'}
+      className={showQuickAddTask ? "add-task add-task__overlay" : "add-task"}
       data-testid="add-task-comp"
     >
       {showAddTaskMain && (
@@ -69,8 +70,8 @@ export const AddTask = ({
         </div>
       )}
 
-      {(showMain || showQuickAddTask) &&  (
-        <div className="add-task__main" data-testid='add-task-main'>
+      {(showMain || showQuickAddTask) && (
+        <div className="add-task__main" data-testid="add-task-main">
           {showQuickAddTask && (
             <>
               <div data-testid="quick-add-task">
@@ -79,9 +80,9 @@ export const AddTask = ({
                   className="add-task__cancel-x"
                   data-testid="add-task-quick-cancel"
                   onClick={() => {
-                    setShowMain(false)
-                    setShowProjectOverlay(false)
-                    setShowQuickAddTask(false)
+                    setShowMain(false);
+                    setShowProjectOverlay(false);
+                    setShowQuickAddTask(false);
                   }}
                 >
                   X
@@ -89,7 +90,13 @@ export const AddTask = ({
               </div>
             </>
           )}
-          <p>Project overlay here</p>
+
+          <ProjectOverlay
+            setProject={setProject}
+            showProjectOverlay={showProjectOverlay}
+            setShowProjectOverlay={setShowProjectOverlay}
+          />
+
           <p>TaskDate here</p>
           <input
             type="text"
@@ -111,8 +118,8 @@ export const AddTask = ({
               className="add-task__cancel"
               data-testid="add-task-main-cancel"
               onClick={() => {
-                setShowMain(false)
-                setShowProjectOverlay(false)
+                setShowMain(false);
+                setShowProjectOverlay(false);
               }}
             >
               Cancel
@@ -136,5 +143,5 @@ export const AddTask = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
