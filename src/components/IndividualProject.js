@@ -1,25 +1,25 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useProjectsValue, useSelectedProjectValue } from "../context";
 import { firebase } from "../firebase";
 
-export const IndividualProject = ({project}) => {
-  const [showConfirm, setShowConfirm] = useState(false)
-  const {projects, setProjects} = useProjectsValue()
-  const {setSelectedProject} = useSelectedProjectValue()
+export const IndividualProject = ({ project }) => {
+  const [showConfirm, setShowConfirm] = useState(false);
+  const { projects, setProjects } = useProjectsValue();
+  const { setSelectedProject } = useSelectedProjectValue();
 
   const deleteProject = docId => {
     firebase
       .firestore()
-      .collection('projects')
+      .collection("projects")
       .doc(docId)
       .delete()
       .then(() => {
-        setProjects([...projects])
-        setSelectedProject('INBOX')
-      })
-  }
+        setProjects([...projects]);
+        setSelectedProject("INBOX");
+      });
+  };
 
   return (
     <>
@@ -29,6 +29,9 @@ export const IndividualProject = ({project}) => {
         className="sidebar__project-delete"
         data-testid="delete-project"
         onClick={() => setShowConfirm(!showConfirm)}
+        onKeyDown={() => setShowConfirm(!showConfirm)}
+        tabIndex={0}
+        role="button"
       >
         <FaTrashAlt />
         {showConfirm && (
@@ -41,15 +44,22 @@ export const IndividualProject = ({project}) => {
               >
                 Delete
               </button>
-              <span onClick={() => setShowConfirm(!showConfirm)}>Cancel</span>
+              <span
+                tabIndex={0}
+                role="button"
+                onClick={() => setShowConfirm(!showConfirm)}
+                onKeyDown={() => setShowConfirm(!showConfirm)}
+              >
+                Cancel
+              </span>
             </div>
           </div>
         )}
       </span>
     </>
-  )
-}
+  );
+};
 
 IndividualProject.propTypes = {
-  project: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired
 };
