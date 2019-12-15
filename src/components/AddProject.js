@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { firebase } from "../firebase";
 import { generatePushId } from "../helpers";
 import { useProjectsValue } from "../context";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const AddProject = ({ shouldShow = false }) => {
   const [show, setShow] = useState(shouldShow);
@@ -48,6 +48,7 @@ export const AddProject = ({ shouldShow = false }) => {
             Add Project
           </button>
           <span
+            aria-label="Cancel adding project"
             data-test-id="hide-project-overlay"
             className="add-project__cancel"
             onClick={() => setShow(false)}
@@ -61,6 +62,7 @@ export const AddProject = ({ shouldShow = false }) => {
       )}
       <span className="add-project__plus">+</span>
       <span
+        aria-label="Add project"
         data-testid="add-project-action"
         className="add-project__text"
         onClick={() => setShow(!show)}
@@ -74,5 +76,5 @@ export const AddProject = ({ shouldShow = false }) => {
   );
 };
 AddProject.propTypes = {
-  shouldShow: PropTypes.bool,
+  shouldShow: PropTypes.bool
 };
