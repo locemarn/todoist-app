@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^6.2.4",
     "moment": "^2.24.0",
@@ -18,8 +18,29 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/firebase.prod.js",
+      "!src/hooks/*.js",
+      "!src/context/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "html",
+      "text"
+    ]
   },
   "browserslist": {
     "production": [
@@ -36,6 +57,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
+    "eslint-plugin-jest": "^23.1.1",
     "eslint-plugin-react": "^7.17.0"
   }
 }
