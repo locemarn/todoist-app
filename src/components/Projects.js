@@ -20,6 +20,7 @@ export const Projects = ({ activeValue = true }) => {
             ? "active sidebar__project"
             : "sidebar__project"
         }
+        aria-label={`Select ${project.name} as the task project`}
       >
         <div
           role="button"

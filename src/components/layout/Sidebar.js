@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   FaChevronDown,
   FaInbox,
   FaRegCalendarAlt,
-  FaRegCalendar,
-} from 'react-icons/fa';
-import { Projects } from '../Projects';
-import { useSelectedProjectValue } from '../../context';
-import { AddProject } from '../AddProject';
+  FaRegCalendar
+} from "react-icons/fa";
+import { Projects } from "../Projects";
+import { useSelectedProjectValue } from "../../context";
+import { AddProject } from "../AddProject";
 
 export const Sidebar = () => {
   const { setSelectedProject } = useSelectedProjectValue();
-  const [active, setActive] = useState('inbox');
+  const [active, setActive] = useState("inbox");
   const [showProjects, setShowProjects] = useState(true);
 
   return (
@@ -19,7 +19,7 @@ export const Sidebar = () => {
       <ul className="sidebar__generic">
         <li
           data-testid="inbox"
-          className={active === 'inbox' ? 'active' : undefined}
+          className={active === "inbox" ? "active" : undefined}
         >
           <div
             data-testid="inbox-action"
@@ -27,12 +27,12 @@ export const Sidebar = () => {
             tabIndex={0}
             role="button"
             onClick={() => {
-              setActive('inbox');
-              setSelectedProject('INBOX');
+              setActive("inbox");
+              setSelectedProject("INBOX");
             }}
             onKeyDown={() => {
-              setActive('inbox');
-              setSelectedProject('INBOX');
+              setActive("inbox");
+              setSelectedProject("INBOX");
             }}
           >
             <span>
@@ -43,7 +43,7 @@ export const Sidebar = () => {
         </li>
         <li
           data-testid="today"
-          className={active === 'today' ? 'active' : undefined}
+          className={active === "today" ? "active" : undefined}
         >
           <div
             data-testid="today-action"
@@ -51,12 +51,12 @@ export const Sidebar = () => {
             tabIndex={0}
             role="button"
             onClick={() => {
-              setActive('today');
-              setSelectedProject('TODAY');
+              setActive("today");
+              setSelectedProject("TODAY");
             }}
             onKeyDown={() => {
-              setActive('today');
-              setSelectedProject('TODAY');
+              setActive("today");
+              setSelectedProject("TODAY");
             }}
           >
             <span>
@@ -67,7 +67,7 @@ export const Sidebar = () => {
         </li>
         <li
           data-testid="next_7"
-          className={active === 'next_7' ? 'active' : undefined}
+          className={active === "next_7" ? "active" : undefined}
         >
           <div
             data-testid="next_7-action"
@@ -75,12 +75,12 @@ export const Sidebar = () => {
             tabIndex={0}
             role="button"
             onClick={() => {
-              setActive('next_7');
-              setSelectedProject('NEXT_7');
+              setActive("next_7");
+              setSelectedProject("NEXT_7");
             }}
             onKeyDown={() => {
-              setActive('next_7');
-              setSelectedProject('NEXT_7');
+              setActive("next_7");
+              setSelectedProject("NEXT_7");
             }}
           >
             <span>
@@ -100,7 +100,7 @@ export const Sidebar = () => {
       >
         <span>
           <FaChevronDown
-            className={!showProjects ? 'hidden-projects' : undefined}
+            className={!showProjects ? "hidden-projects" : undefined}
           />
         </span>
         <h2>Projects</h2>
