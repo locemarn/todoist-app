@@ -12,18 +12,19 @@ export const Projects = ({ activeValue = true }) => {
     projects.map(project => (
       <li
         key={project.projectId}
+        data-testid="project-action-parent"
         data-doc-id={project.docId}
-        data-testid="project-action"
         role="button"
         className={
           active === project.projectId
-            ? "active sidebar__project"
-            : "sidebar__project"
+          ? "active sidebar__project"
+          : "sidebar__project"
         }
         aria-label={`Select ${project.name} as the task project`}
-      >
+        >
         <div
           role="button"
+          data-testid="project-action"
           tabIndex={0}
           onKeyDown={() => {
             setActive(project.projectId);
